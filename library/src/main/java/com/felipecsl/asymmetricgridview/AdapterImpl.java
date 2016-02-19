@@ -186,7 +186,7 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
       layout.setBackgroundColor(Color.parseColor("#83F27B"));
     }
 
-    layout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+    layout.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
     layout.setDividerDrawable(
         ContextCompat.getDrawable(context, R.drawable.item_divider_horizontal));
 
@@ -250,7 +250,7 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
         childLayout.setBackgroundColor(Color.parseColor("#837BF2"));
       }
 
-      childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+      childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
       childLayout.setDividerDrawable(
           ContextCompat.getDrawable(context, R.drawable.item_divider_vertical));
 

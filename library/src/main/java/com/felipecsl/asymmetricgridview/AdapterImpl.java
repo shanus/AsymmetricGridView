@@ -28,6 +28,7 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
   private final AGVBaseAdapter<?> agvAdapter;
   private final AsymmetricView listView;
   private final boolean debugEnabled;
+  private final boolean dividersEnabled;
   private ProcessRowsTask asyncTask;
 
   AdapterImpl(Context context, AGVBaseAdapter<?> agvAdapter, AsymmetricView listView) {
@@ -35,6 +36,7 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
     this.agvAdapter = agvAdapter;
     this.listView = listView;
     this.debugEnabled = listView.isDebugging();
+    this.dividersEnabled = listView.hasVisibleDividers();
     this.linearLayoutPool = new ObjectPool<>(new LinearLayoutPoolObjectFactory(context));
   }
 
@@ -193,8 +195,11 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
     if (debugEnabled) {
       layout.setBackgroundColor(Color.parseColor("#83F27B"));
     }
-
-    layout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+    if (dividersEnabled) {
+      layout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+    } else {
+      layout.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
+    }
     layout.setDividerDrawable(
         ContextCompat.getDrawable(context, R.drawable.item_divider_horizontal));
 
@@ -257,8 +262,11 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
       if (debugEnabled) {
         childLayout.setBackgroundColor(Color.parseColor("#837BF2"));
       }
-
-      childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+      if (dividersEnabled) {
+        childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+      } else {
+        childLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
+      }
       childLayout.setDividerDrawable(
           ContextCompat.getDrawable(context, R.drawable.item_divider_vertical));
 

@@ -142,4 +142,10 @@ public class AsymmetricGridView extends ListView implements AsymmetricView {
   public void setDebugging(boolean debugging) {
     viewImpl.setDebugging(debugging);
   }
+
+  @Override public boolean hasVisibleDividers() {
+    return viewImpl.hasVisibleDividers();
+  }
+
+  public void setDividersVisible(boolean visible) { viewImpl.setDividersVisible(visible); }
 }

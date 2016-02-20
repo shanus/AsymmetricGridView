@@ -4,6 +4,7 @@ import android.view.View;
 
 interface AsymmetricView {
   boolean isDebugging();
+  boolean hasVisibleDividers();
   int getNumColumns();
   boolean isAllowReordering();
   void fireOnItemClick(int index, View v);

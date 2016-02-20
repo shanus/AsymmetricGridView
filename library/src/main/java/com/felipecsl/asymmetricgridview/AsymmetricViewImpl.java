@@ -14,6 +14,7 @@ final class AsymmetricViewImpl {
   protected int requestedColumnCount;
   protected boolean allowReordering;
   protected boolean debugging;
+  protected boolean dividersVisible;
 
   AsymmetricViewImpl(Context context) {
     requestedHorizontalSpacing = Utils.dpToPx(context, 5);
@@ -61,6 +62,7 @@ final class AsymmetricViewImpl {
     SavedState ss = new SavedState(superState);
     ss.allowReordering = allowReordering;
     ss.debugging = debugging;
+    ss.dividersVisible = dividersVisible;
     ss.numColumns = numColumns;
     ss.requestedColumnCount = requestedColumnCount;
     ss.requestedColumnWidth = requestedColumnWidth;
@@ -71,6 +73,7 @@ final class AsymmetricViewImpl {
   public void onRestoreInstanceState(SavedState ss) {
     allowReordering = ss.allowReordering;
     debugging = ss.debugging;
+    dividersVisible = ss.dividersVisible;
     numColumns = ss.numColumns;
     requestedColumnCount = ss.requestedColumnCount;
     requestedColumnWidth = ss.requestedColumnWidth;
@@ -101,6 +104,14 @@ final class AsymmetricViewImpl {
     this.debugging = debugging;
   }
 
+  public boolean hasVisibleDividers() {
+    return dividersVisible;
+  }
+
+  public void setDividersVisible(boolean visible) {
+    this.dividersVisible = visible;
+  }
+
   static class SavedState extends View.BaseSavedState {
     int numColumns;
     int requestedColumnWidth;
@@ -109,6 +120,7 @@ final class AsymmetricViewImpl {
     int requestedHorizontalSpacing;
     int defaultPadding;
     boolean debugging;
+    boolean dividersVisible;
     boolean allowReordering;
     Parcelable adapterState;
     ClassLoader loader;
@@ -127,6 +139,7 @@ final class AsymmetricViewImpl {
       requestedHorizontalSpacing = in.readInt();
       defaultPadding = in.readInt();
       debugging = in.readByte() == 1;
+      dividersVisible = in.readByte() == 1;
       allowReordering = in.readByte() == 1;
       adapterState = in.readParcelable(loader);
     }
@@ -141,6 +154,7 @@ final class AsymmetricViewImpl {
       dest.writeInt(requestedHorizontalSpacing);
       dest.writeInt(defaultPadding);
       dest.writeByte((byte) (debugging ? 1 : 0));
+      dest.writeByte((byte) (dividersVisible ? 1 : 0));
       dest.writeByte((byte) (allowReordering ? 1 : 0));
       dest.writeParcelable(adapterState, flags);
     }

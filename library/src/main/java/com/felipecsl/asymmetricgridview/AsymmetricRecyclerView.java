@@ -49,6 +49,10 @@ public class AsymmetricRecyclerView extends RecyclerView implements AsymmetricVi
     viewImpl.determineColumns(getAvailableSpace());
   }
 
+  @Override public boolean hasVisibleDividers() {
+    return viewImpl.hasVisibleDividers();
+  }
+
   @Override public boolean isDebugging() {
     return viewImpl.isDebugging();
   }
@@ -94,5 +98,9 @@ public class AsymmetricRecyclerView extends RecyclerView implements AsymmetricVi
 
   public void setDebugging(boolean debugging) {
     viewImpl.setDebugging(debugging);
+  }
+
+  public void setDividersVisible(boolean visible) {
+    viewImpl.setDividersVisible(visible);
   }
 }

@@ -90,15 +90,23 @@ final class AdapterImpl implements View.OnClickListener, View.OnLongClickListene
     asyncTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
   }
 
+  // updated onClick and onLongClick to check parent view as ripple adapter may have passed in this event -slm 02/20/2016
+
   @Override public void onClick(@NonNull View v) {
     // noinspection unchecked
     ViewState rowItem = (ViewState) v.getTag();
+    if (rowItem == null) {
+      rowItem = (ViewState) ((View) v.getParent()).getTag();
+    }
     listView.fireOnItemClick(rowItem.rowItem.getIndex(), v);
   }
 
   @Override public boolean onLongClick(@NonNull View v) {
     // noinspection unchecked
     ViewState rowItem = (ViewState) v.getTag();
+    if (rowItem == null) {
+      rowItem = (ViewState) ((View) v.getParent()).getTag();
+    }
     return listView.fireOnItemLongClick(rowItem.rowItem.getIndex(), v);
   }
 
